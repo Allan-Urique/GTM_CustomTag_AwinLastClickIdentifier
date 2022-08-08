@@ -14,7 +14,6 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Awin - AW Last Click Identifier",
-  "categories": ["Attribution"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -32,29 +31,6 @@ ___TEMPLATE_PARAMETERS___
 [
   {
     "type": "TEXT",
-    "name": "cookiePeriod",
-    "displayName": "Cookie length",
-    "simpleValueType": true,
-    "defaultValue": 30,
-    "alwaysInSummary": true,
-    "notSetText": "Inform a value in days.",
-    "help": "This value should be identical to what is specified in your contract with Awin. Default is 30 days. Required format: Positive Integer.",
-    "valueValidators": [
-      {
-        "type": "NON_EMPTY"
-      },
-      {
-        "type": "NON_EMPTY",
-        "errorMessage": ""
-      },
-      {
-        "type": "POSITIVE_NUMBER"
-      }
-    ],
-    "valueHint": "30"
-  },
-  {
-    "type": "TEXT",
     "name": "cookieName",
     "displayName": "Cookie name",
     "simpleValueType": true,
@@ -65,9 +41,37 @@ ___TEMPLATE_PARAMETERS___
     "valueValidators": [
       {
         "type": "NON_EMPTY"
+      },
+      {
+        "type": "REGEX",
+        "args": [
+          "^[a-zA-Z0-9_-]*$"
+        ],
+        "errorMessage": "This field only accepts letters, numbers, hyphens and underlines."
       }
     ],
     "alwaysInSummary": true
+  },
+  {
+    "type": "TEXT",
+    "name": "cookiePeriod",
+    "displayName": "Cookie length",
+    "simpleValueType": true,
+    "defaultValue": 30,
+    "alwaysInSummary": true,
+    "notSetText": "Inform a value in days.",
+    "help": "This value should be identical to what is specified in your contract with Awin. Default is 30 days. Required format: Positive Integer.",
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY",
+        "errorMessage": ""
+      },
+      {
+        "type": "POSITIVE_NUMBER",
+        "errorMessage": "This field can only accept numbers."
+      }
+    ],
+    "valueHint": "30"
   },
   {
     "type": "TEXT",
@@ -86,6 +90,27 @@ ___TEMPLATE_PARAMETERS___
           "^[a-zA-Z0-9_,-]*$"
         ],
         "errorMessage": "Letters and numbers only, do not use space. Separate parameters using a comma \",\". Exampe: \"utm_source,gclid,fbclid\". RegEx: ^[a-zA-Z0-9_,-]*$"
+      }
+    ],
+    "help": "Inform all the source determining parameters you use with other paid channels. Such as \"utm_source\", \"gclid\" for Google Ads or \"fbclid\" for Facebook Ads. Leave this as is if you are unsure."
+  },
+  {
+    "type": "TEXT",
+    "name": "awinSource",
+    "displayName": "Awin Source Value",
+    "simpleValueType": true,
+    "alwaysInSummary": true,
+    "defaultValue": "awin",
+    "help": "The value passed inside the source parameter used in Awin links. Leave this as \"awin\" if you are unsure.",
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      },
+      {
+        "type": "REGEX",
+        "args": [
+          "^[a-zA-Z0-9_-]*$"
+        ]
       }
     ]
   },
@@ -115,6 +140,7 @@ const cookiePeriod = data.cookiePeriod;
 const cookieName = data.cookieName;
 const sourceParameters = data.sourceParameters.split(",");
 const organicFilter = data.organicFilter;
+const awinSource = data.awinSource;
 const parseUrl = require('parseUrl');
 
 //URL variables. 
@@ -150,19 +176,18 @@ for(var i = 0; i < queryParameters.length; i++){
 //Add optional organic filter logic
 
 if(organicFilter == true){
-  if (matchedSourceParameter == "awin" || matchedSourceParameter == null || matchedSourceParameter == "undefined" || matchedSourceParameter == "na") {
+  if (matchedSourceParameter.toLowerCase() == awinSource.toLowerCase() || matchedSourceParameter.toLowerCase() == null || matchedSourceParameter.toLowerCase() == "undefined" || matchedSourceParameter.toLowerCase() == "na") {
     awLastClick = "aw";
   } else if(referrer == origin){
     awLastClick = "other";
   }
 } else {
-  if (matchedSourceParameter == "awin" || matchedSourceParameter == null || matchedSourceParameter == "undefined") {
+  if (matchedSourceParameter.toLowerCase() == awinSource.toLowerCase() || matchedSourceParameter.toLowerCase() == null || matchedSourceParameter.toLowerCase() == "undefined") {
     awLastClick = "aw";
   } else {
     awLastClick = "other";
   }
 }
-
 
 setCookie(cookieName, awLastClick, options, false);
 
@@ -326,6 +351,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 8/8/2022, 4:06:39 PM
+Created on 8/8/2022, 5:43:20 PM
 
 
