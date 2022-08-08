@@ -14,7 +14,6 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Awin - AW Last Click Identifier",
-  "categories": "Attribution",
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
