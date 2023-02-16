@@ -60,14 +60,14 @@ ___TEMPLATE_PARAMETERS___
     "defaultValue": 30,
     "alwaysInSummary": true,
     "notSetText": "Inform a value in days.",
-    "help": "This value should be identical to what is specified in your contract with Awin. Default is 30 days. Required format: Positive Integer.",
+    "help": "This value should be identical to what is specified in your contract with Awin. Default is 30 days. Required format: Positive Integer or 0 (for session tracking).",
     "valueValidators": [
       {
         "type": "NON_EMPTY",
         "errorMessage": ""
       },
       {
-        "type": "POSITIVE_NUMBER",
+        "type": "NON_NEGATIVE_NUMBER",
         "errorMessage": "This field can only accept numbers."
       }
     ],
@@ -147,29 +147,50 @@ const parseUrl = require('parseUrl');
 let referrer = referrerURL(); // This will return the referrer URL for deduping agains organic.
 let URL = queryParameters(); // This will return the current URL
 let urlObject = parseUrl(URL); // This object contains the components of the URL, will be used to retrieve specific parts of it.
-let domain = "." + urlObject.host; // Returns the domain and considers any subdomains
 let origin = urlObject.origin; // Returns the origin
+let cookieDomain = ""; // The domain for the AwinChannel cookie, will consider subdomains
+let urlParts = urlObject.host.split("."); //Used to split the host, and get only the relevant data for the cookieDomain 
 
 //Internal script variables
 let sourceValue = "";
 let awLastClick = "";
 let matchedSourceParameter = "na";
 let queryValues = "";
-
+let containsAwaid;
+let cookieLength;
 queryParameters = queryParameters('query', false, null, 'query').split("&");
 
+for(var i = 0; i < urlParts.length; i++){
+  if(urlParts[i] != "www"){
+    cookieDomain += "." + urlParts[i]; 
+  }
+}
+
+if(cookiePeriod == 0){
+  cookieLength = "";
+} else {
+  cookieLength = 60*60*24*cookiePeriod;
+}
+
+
 const options = {
-  'domain': domain,
+  'domain': cookieDomain,
   'path': '/',
-  'max-age': 60*60*24*cookiePeriod,
+  'max-age': cookieLength,
   'secure': false
 };
-
 
 for(var i = 0; i < queryParameters.length; i++){
   queryValues = queryParameters[i].split("=");
   if(sourceParameters.indexOf(queryValues[0]) > -1){
     matchedSourceParameter = queryValues[1];
+  }
+  if(queryValues[0] == "awaid"){
+    containsAwaid = true;
+    awLastClick = "aw";
+    setCookie(cookieName, awLastClick, options, false);
+    data.gtmOnSuccess();
+    return;
   }
 }
 
@@ -339,6 +360,9 @@ ___WEB_PERMISSIONS___
         }
       ]
     },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
     "isRequired": true
   }
 ]
@@ -352,5 +376,4 @@ scenarios: []
 ___NOTES___
 
 Created on 8/10/2022, 6:02:59 PM
-
 
