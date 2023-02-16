@@ -3,7 +3,7 @@ documentation: "https://www.awin.com/br"
 versions:
 # Latest version
  - sha: f4f3cceb5a6ed92cd5963c3a8dbd14d3a68da77d
-    changeNotes: 
+    changeNotes: |2
     Added the ability to create cookies that experie once the session is finished. Simply use 0 for the cookie length field.
     Template will now take into consideration publishers that use Google Parallel tracking, by using the awaid parameter as a condition.
 
