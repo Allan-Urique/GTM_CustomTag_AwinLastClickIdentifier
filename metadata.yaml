@@ -2,10 +2,12 @@ homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
 # Latest version
+  - sha: 939c4c3f13ebcf4761eae92ca914099cae7433a9
+    changeNotes: Added the ability to overwrite the cookie domain and set it manually.
+# Older versions
   - sha: f4f3cceb5a6ed92cd5963c3a8dbd14d3a68da77d
     changeNotes: |2
       Added the ability to create cookies that experie once the session is finished. Simply use 0 for the cookie length field.
       Template will now take into consideration publishers that use Google Parallel tracking, by using the awaid parameter as a condition.
-  # Older versions
   - sha: 8cd223d36382d35814d729f25f3b04b0c20e4207
     changeNotes: Initial release.
