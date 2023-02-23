@@ -1,4 +1,4 @@
-﻿___TERMS_OF_SERVICE___
+___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
@@ -122,6 +122,35 @@ ___TEMPLATE_PARAMETERS___
     "help": "If enabled, will rewrite the AwinChannelCookie to \"other\" and stop measuring organic traffic after interactions with the Awin link. CONTACT YOUR COMMERCIAL CONTACT BEFORE ENABLING.",
     "alwaysInSummary": true,
     "defaultValue": false
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "overwriteCookieDomain",
+    "checkboxText": "Overwrite Cookie Domain",
+    "simpleValueType": true,
+    "help": "If enabled, will let you manually set the AwinChannelCookie\u0027s domain.",
+    "alwaysInSummary": true,
+    "defaultValue": false
+  },
+  {
+    "type": "TEXT",
+    "name": "awinChannelCookieDomain",
+    "displayName": "AwinChannelCookie Domain",
+    "simpleValueType": true,
+    "alwaysInSummary": true,
+    "help": "The domain where the AwinChannelCookie will be created. Should be something like \".exampleURL.com\"",
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      }
+    ],
+    "enablingConditions": [
+      {
+        "paramName": "overwriteCookieDomain",
+        "paramValue": true,
+        "type": "EQUALS"
+      }
+    ]
   }
 ]
 
@@ -142,6 +171,8 @@ const sourceParameters = data.sourceParameters.split(",");
 const organicFilter = data.organicFilter;
 const awinSource = data.awinSource;
 const parseUrl = require('parseUrl');
+const overwriteCookieDomain = data.overwriteCookieDomain;
+const awinChannelCookieDomain = data.awinChannelCookieDomain;
 
 //URL variables. 
 let referrer = referrerURL(); // This will return the referrer URL for deduping agains organic.
@@ -160,9 +191,13 @@ let containsAwaid;
 let cookieLength;
 queryParameters = queryParameters('query', false, null, 'query').split("&");
 
-for(var i = 0; i < urlParts.length; i++){
-  if(urlParts[i] != "www"){
-    cookieDomain += "." + urlParts[i]; 
+if(overwriteCookieDomain){
+  cookieDomain = awinChannelCookieDomain;
+} else {
+  for(var i = 0; i < urlParts.length; i++){
+    if(urlParts[i] != "www"){
+      cookieDomain += "." + urlParts[i]; 
+    }
   }
 }
 
