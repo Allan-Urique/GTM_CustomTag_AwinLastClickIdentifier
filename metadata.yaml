@@ -2,9 +2,11 @@ homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
 # Latest version
+  - sha: 389fadcb2d3e1d155d602b523e788302028ee07e
+    changeNotes: Added the ability to use multiple Awin Source values. This way advertisers can have campaigns with multiple "utm_source" values for example, and the template will still record transactions correctly.
+# Older versions
   - sha: 939c4c3f13ebcf4761eae92ca914099cae7433a9
     changeNotes: Added the ability to overwrite the cookie domain and set it manually.
-# Older versions
   - sha: f4f3cceb5a6ed92cd5963c3a8dbd14d3a68da77d
     changeNotes: |2
       Added the ability to create cookies that experie once the session is finished. Simply use 0 for the cookie length field.
