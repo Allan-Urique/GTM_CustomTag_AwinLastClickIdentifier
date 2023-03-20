@@ -169,7 +169,7 @@ const cookiePeriod = data.cookiePeriod;
 const cookieName = data.cookieName;
 const sourceParameters = data.sourceParameters.split(",");
 const organicFilter = data.organicFilter;
-const awinSource = data.awinSource;
+const awinSource = data.awinSource.split(",");
 const parseUrl = require('parseUrl');
 const overwriteCookieDomain = data.overwriteCookieDomain;
 const awinChannelCookieDomain = data.awinChannelCookieDomain;
@@ -232,16 +232,24 @@ for(var i = 0; i < queryParameters.length; i++){
 //Add optional organic filter logic
 
 if(organicFilter == true){
-  if (matchedSourceParameter.toLowerCase() == awinSource.toLowerCase() || matchedSourceParameter.toLowerCase() == null || matchedSourceParameter.toLowerCase() == "undefined" || matchedSourceParameter.toLowerCase() == "na") {
-    awLastClick = "aw";
-  } else if(referrer == origin || referrer == "https://www.google.com/"){
-    awLastClick = "other";
+  for(var i = 0; i < awinSource.length; i++){
+    if (matchedSourceParameter.toLowerCase() == awinSource[i].toLowerCase() || matchedSourceParameter.toLowerCase() == null || matchedSourceParameter.toLowerCase() == "undefined" || matchedSourceParameter.toLowerCase() == "na") {
+      awLastClick = "aw";
+      break;
+    } else if(referrer == origin || referrer == "https://www.google.com/"){
+      awLastClick = "other";
+    }
   }
+  
 } else {
-  if (matchedSourceParameter.toLowerCase() == awinSource.toLowerCase() || matchedSourceParameter.toLowerCase() == null || matchedSourceParameter.toLowerCase() == "undefined") {
-    awLastClick = "aw";
-  } else {
-    awLastClick = "other";
+  for(var i = 0; i < awinSource.length; i++){
+    log("Source Parameter Value => " + matchedSourceParameter.toLowerCase() + " Awin Source Values " + i + " => " + awinSource[i].toLowerCase());
+    if (matchedSourceParameter.toLowerCase() == awinSource[i].toLowerCase() || matchedSourceParameter.toLowerCase() == null || matchedSourceParameter.toLowerCase() == "undefined") {
+      awLastClick = "aw";
+      break;
+    } else {
+      awLastClick = "other";
+    }
   }
 }
 
