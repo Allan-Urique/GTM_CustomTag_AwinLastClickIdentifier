@@ -101,7 +101,7 @@ ___TEMPLATE_PARAMETERS___
     "simpleValueType": true,
     "alwaysInSummary": true,
     "defaultValue": "awin",
-    "help": "The value passed inside the source parameter used in Awin links. Leave this as \"awin\" if you are unsure.",
+    "help": "The value passed inside the source parameter used in Awin links. Leave this as \"awin\" if you are unsure. If you use multiple values, separate them using a comma",
     "valueValidators": [
       {
         "type": "NON_EMPTY"
@@ -109,7 +109,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "REGEX",
         "args": [
-          "^[a-zA-Z0-9_-]*$"
+          "^[a-zA-Z0-9_,-]*$"
         ]
       }
     ]
