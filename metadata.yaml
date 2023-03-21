@@ -2,7 +2,7 @@ homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
 # Latest version
-  - sha: 389fadcb2d3e1d155d602b523e788302028ee07e
+  - sha: bcde5b2658423f892a20fc2bc615b5d9034ec028
     changeNotes: Added the ability to use multiple Awin Source values. This way advertisers can have campaigns with multiple "utm_source" values for example, and the template will still record transactions correctly.
 # Older versions
   - sha: 939c4c3f13ebcf4761eae92ca914099cae7433a9
