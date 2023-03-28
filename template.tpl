@@ -246,6 +246,13 @@ if(cookieDomain.substring(0, 1) == "."){
   websiteDomain = cookieDomain;
 }
 
+//Check if the cookie should be a session cookie or not.
+if(cookiePeriod == 0){
+  cookieLength = "";
+} else {
+  cookieLength = 60*60*24*cookiePeriod;
+}
+
 const options = {
   'domain': cookieDomain,
   'path': '/',
@@ -263,14 +270,7 @@ if(Contains(referrer, websiteDomain)){
   data.gtmOnSuccess();
 } else {
   //First visit in the session, proceed with tag behaviour.
-  
-  //Check if the cookie should be a session cookie or not.
-  if(cookiePeriod == 0){
-    cookieLength = "";
-  } else {
-    cookieLength = 60*60*24*cookiePeriod;
-  }
-  
+    
   //Find and match the given source parameter.
   for(var i = 0; i < queryParameters.length; i++){
     queryValues = queryParameters[i].split("=");
