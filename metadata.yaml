@@ -2,9 +2,11 @@ homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
 # Latest version
+  - sha: 078c0f4a153ee332b7f617976c890564af5ab7c5
+    changeNotes: The template is now simpler to use, just trigger it using an All Pages trigger and it will automatically decide how to proceed.
+# Older versions
   - sha: bcde5b2658423f892a20fc2bc615b5d9034ec028
     changeNotes: Added the ability to use multiple Awin Source values. This way advertisers can have campaigns with multiple "utm_source" values for example, and the template will still record transactions correctly.
-# Older versions
   - sha: 939c4c3f13ebcf4761eae92ca914099cae7433a9
     changeNotes: Added the ability to overwrite the cookie domain and set it manually.
   - sha: f4f3cceb5a6ed92cd5963c3a8dbd14d3a68da77d
