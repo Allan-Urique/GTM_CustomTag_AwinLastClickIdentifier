@@ -2,9 +2,11 @@ homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
 # Latest version
+  - sha: 9df9b54fb065c95b1d918138bcaa05df21135f99
+    changeNotes: Changed the default value for the "Using All Pages Trigger" checkbos to false.
+# Older versions
   - sha: 3e33a2d2704b752903dc06ff6bf76f9e30c61a49
     changeNotes: Added a feature for you to be able to use source trigger again, instead of all pages. If the advertiser uses a cookie consent pop-up that redirects to the website, it would cause the template to not work. If you disable the "Using All Page Trigger" checkbox now and use the source trigger instead. It should work correctly.
-# Older versions
   - sha: d5aee6e73438bbb78ebde46d20757fc68832f91c
     changeNotes: Fixed a bug where the cookie would be created with a session only expiring date.
   - sha: 078c0f4a153ee332b7f617976c890564af5ab7c5
