@@ -139,7 +139,7 @@ ___TEMPLATE_PARAMETERS___
     "simpleValueType": true,
     "help": "If you are using an all page trigger, check this box.",
     "alwaysInSummary": true,
-    "defaultValue": true
+    "defaultValue": false
   },
   {
     "type": "TEXT",
