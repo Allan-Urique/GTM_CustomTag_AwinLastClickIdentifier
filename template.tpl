@@ -301,7 +301,7 @@ if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
   if(organicFilter == true){
     for(var i = 0; i < awinSource.length; i++){
       //Try to find the given Awin Source Values in the matched source parameter.
-      if (matchedSourceParameter.toLowerCase() == awinSource[i].toLowerCase()){
+      if (Contains(matchedSourceParameter.toLowerCase(), awinSource[i].toLowerCase())){
         awLastClick = "aw";
         SetChannelCookie();
         break;
@@ -314,9 +314,9 @@ if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
       }
     }
   } else {
-    //Advertiser didn't enable the organic trigger, proceed with normal last paid click checks.
+    //Advertiser did not enable the organic trigger, proceed with normal last paid click checks.
     for(var i = 0; i < awinSource.length; i++){
-      if (matchedSourceParameter.toLowerCase() == awinSource[i].toLowerCase()) {
+      if (Contains(matchedSourceParameter.toLowerCase(), awinSource[i].toLowerCase())) {
         awLastClick = "aw";
         SetChannelCookie();
         break;
