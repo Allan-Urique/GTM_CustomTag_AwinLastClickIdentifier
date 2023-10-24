@@ -296,7 +296,15 @@ if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
       return;
     }
   }
-
+  
+  //Check if the cookise should be a session cookie, and if the user is out of an Awin session, if so, hault the progress of the tag.
+  
+  if(cookiePeriod == 0 && matchedSourceParameter == "na"){
+    log("not an Awin session, hault progress of the tag");
+    data.gtmOnSuccess();
+    return;
+  }
+  
   //Check if advertiser enabled the organic filter or not.
   if(organicFilter == true){
     for(var i = 0; i < awinSource.length; i++){
@@ -336,7 +344,6 @@ if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
   // Call data.gtmOnSuccess when the tag is finished.
   data.gtmOnSuccess();
 }
-
 
 ___WEB_PERMISSIONS___
 
