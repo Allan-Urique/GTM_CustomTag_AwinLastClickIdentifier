@@ -2,9 +2,11 @@ homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
 # Latest version
+  - sha: c196dc65d5101dff094682ecd3b763aec108313e
+    changeNotes: Fixed an issue that was causing session cookies to be recreated after the session ended.
+# Older versions
   - sha: c486ac95c4d677ad86499c3c4999c48e49692e13
     changeNotes: Updated the template to check if source contains awin source value, instead of exact match.
-# Older versions
   - sha: 9df9b54fb065c95b1d918138bcaa05df21135f99
     changeNotes: Changed the default value for the "Using All Pages Trigger" checkbos to false.
   - sha: 3e33a2d2704b752903dc06ff6bf76f9e30c61a49
