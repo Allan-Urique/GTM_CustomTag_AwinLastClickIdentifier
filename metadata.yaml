@@ -2,9 +2,11 @@ homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
 # Latest version
+  - sha: 747efb147e5ec24aee3a3327cdc42ef77604d447
+    changeNotes: "Allowing '/' to be used in Awin Source Values"
+# Older versions
   - sha: c196dc65d5101dff094682ecd3b763aec108313e
     changeNotes: Fixed an issue that was causing session cookies to be recreated after the session ended.
-# Older versions
   - sha: c486ac95c4d677ad86499c3c4999c48e49692e13
     changeNotes: Updated the template to check if source contains awin source value, instead of exact match.
   - sha: 9df9b54fb065c95b1d918138bcaa05df21135f99
