@@ -109,7 +109,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "REGEX",
         "args": [
-          "^[a-zA-Z0-9_,-]*$"
+          "^[a-zA-Z0-9_,-/]*$"
         ]
       }
     ]
