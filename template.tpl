@@ -201,6 +201,7 @@ let matchedSourceParameter = "na";
 let queryValues = "";
 let containsAwaid;
 let cookieLength;
+let isOrganicJourney;
 //let existingCookieValue = getCookie(cookieName);
 queryParameters = queryParameters('query', false, null, 'query').split("&");
 
@@ -270,7 +271,14 @@ const options = {
   'secure': false
 };
   
-function SetChannelCookie(){
+function SetChannelCookie(){  
+  //Check if the cookise should be a session cookie, and if the user is out of an Awin session, if so, hault the progress of the tag.
+  
+  if(cookiePeriod == 0 && matchedSourceParameter == "na" && !isOrganicJourney){
+    log("not an Awin session, hault progress of the tag");
+    data.gtmOnSuccess();
+    return;
+  }
   setCookie(cookieName, awLastClick, options, false);
 }
 
@@ -297,14 +305,6 @@ if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
     }
   }
   
-  //Check if the cookise should be a session cookie, and if the user is out of an Awin session, if so, hault the progress of the tag.
-  
-  if(cookiePeriod == 0 && matchedSourceParameter == "na"){
-    log("not an Awin session, hault progress of the tag");
-    data.gtmOnSuccess();
-    return;
-  }
-  
   //Check if advertiser enabled the organic filter or not.
   if(organicFilter == true){
     for(var i = 0; i < awinSource.length; i++){
@@ -315,6 +315,7 @@ if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
         break;
       } else if(Contains(referrer, "google") || Contains(referrer, "bing") || Contains(referrer, "yahoo") || Contains(referrer, "yandex") || Contains(referrer, "duckduckgo")){
         awLastClick = "other";
+        isOrganicJourney = true;
         SetChannelCookie(); 
       } else if(matchedSourceParameter.toLowerCase() != "na" && matchedSourceParameter.toLowerCase() != awinSource[i].toLowerCase()){
         awLastClick = "other";
@@ -335,7 +336,7 @@ if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
     }
   }
   
-  //Check if no cookie was created, this means the user didn't interact with any medias, default cookie to "aw".
+  //Check if no cookie was created, this means the user didn't interact with any medias, default cookie to "undefined".
   if(!getCookie(cookieName)[0]){
     awLastClick = "undefined";
     SetChannelCookie();
