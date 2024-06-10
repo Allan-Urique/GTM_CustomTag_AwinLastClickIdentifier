@@ -2,9 +2,11 @@ homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
 # Latest version
-  - sha: 5fc203f592be5c6bd481f3aa5c49e0fa6402b9e1
-    changeNotes: Fixed a bug where the channel cookie would not be created when in a session based setup and in an organic journey. 
+  - sha: 2ff034c83571e948353559cf3c3cb247d4eda759
+    changeNotes: Fixed a bug where the channel cookie would not be created when in a session based setup and in a direct journey. 
 # Older versions
+  - sha: 5fc203f592be5c6bd481f3aa5c49e0fa6402b9e1
+    changeNotes: Fixed a bug where the channel cookie would not be created when in a session based setup and in an organic journey.
   - sha: 6c31cf3db6ba85b1a5d78399bb52cf5bfda6f5db
     changeNotes: Now the channel defaults to 'undefined' if no source is found
   - sha: 747efb147e5ec24aee3a3327cdc42ef77604d447
