@@ -274,8 +274,9 @@ const options = {
 function SetChannelCookie(){  
   //Check if the cookise should be a session cookie, and if the user is out of an Awin session, if so, hault the progress of the tag.
   
-  if(cookiePeriod == 0 && matchedSourceParameter == "na" && !isOrganicJourney){
-    log("not an Awin session, hault progress of the tag");
+  if(cookiePeriod == 0 && matchedSourceParameter == "na" && !isOrganicJourney && !getCookie(cookieName)[0]){
+    awLastClick = "undefined";
+    setCookie(cookieName, awLastClick, options, false);
     data.gtmOnSuccess();
     return;
   }
