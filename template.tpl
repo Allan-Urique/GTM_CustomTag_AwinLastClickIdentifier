@@ -78,7 +78,7 @@ ___TEMPLATE_PARAMETERS___
     "name": "sourceParameters",
     "displayName": "Used Source Parameters",
     "simpleValueType": true,
-    "defaultValue": "utm_source,gclid,fbclid",
+    "defaultValue": "utm_source,source,gclid,fbclid",
     "alwaysInSummary": true,
     "valueValidators": [
       {
