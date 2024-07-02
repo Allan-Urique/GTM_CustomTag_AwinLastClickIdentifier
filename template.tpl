@@ -272,10 +272,9 @@ const options = {
 };
   
 function SetChannelCookie(){  
-  //Check if the cookise should be a session cookie, and if the user is out of an Awin session, if so, hault the progress of the tag.
-  
+  //Check if the cookise should be a session cookie, and if the user is out of an Awin session.
   if(cookiePeriod == 0 && matchedSourceParameter == "na" && !isOrganicJourney && !getCookie(cookieName)[0]){
-    awLastClick = "undefined";
+    awLastClick = "direct";
     setCookie(cookieName, awLastClick, options, false);
     data.gtmOnSuccess();
     return;
@@ -315,7 +314,7 @@ if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
         SetChannelCookie();
         break;
       } else if(Contains(referrer, "google") || Contains(referrer, "bing") || Contains(referrer, "yahoo") || Contains(referrer, "yandex") || Contains(referrer, "duckduckgo")){
-        awLastClick = "other";
+        awLastClick = "organic";
         isOrganicJourney = true;
         SetChannelCookie(); 
       } else if(matchedSourceParameter.toLowerCase() != "na" && matchedSourceParameter.toLowerCase() != awinSource[i].toLowerCase()){
