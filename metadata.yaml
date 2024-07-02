@@ -3,9 +3,11 @@ documentation: "https://www.awin.com"
 versions:
 # Latest version
 
+  - sha: 866ba43822d4426872ae57cf78bdd8850c1ac645
+    changeNotes: Updated the tag to better detect and report when a user is coming from a direct or organic journey.
+# Older versions
   - sha: c6d5046f08f5937a00f05b7de94945f27857a5bc
     changeNotes: Added "source" as a default source parameter. This will speed up integrations for the US market. 
-# Older versions
   - sha: 2ff034c83571e948353559cf3c3cb247d4eda759
     changeNotes: Fixed a bug where the channel cookie would not be created when in a session based setup and in a direct journey. 
   - sha: 5fc203f592be5c6bd481f3aa5c49e0fa6402b9e1
