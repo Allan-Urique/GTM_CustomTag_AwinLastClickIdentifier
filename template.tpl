@@ -336,9 +336,9 @@ if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
     }
   }
   
-  //Check if no cookie was created, this means the user didn't interact with any medias, default cookie to "undefined".
+  //Check if no cookie was created, this means the user didn't interact with any medias, default cookie to "direct".
   if(!getCookie(cookieName)[0]){
-    awLastClick = "undefined";
+    awLastClick = "direct";
     SetChannelCookie();
   }
   
