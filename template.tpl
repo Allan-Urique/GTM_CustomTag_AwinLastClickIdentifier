@@ -257,14 +257,15 @@ if(cookieDomain.substring(0, 1) == "."){
   websiteDomain = cookieDomain;
 }
 
-//Check if the cookie should be a session cookie or not.
-if(cookiePeriod == 0){
-  cookieLength = "";
-} else {
-  cookieLength = 60*60*24*cookiePeriod;
-}
+cookieLength = 60*60*24*cookiePeriod;
 
-const options = {
+const sessionOptions = {
+  'domain': cookieDomain,
+  'path': '/',
+  'secure': false
+};
+
+const defaultOptions = {
   'domain': cookieDomain,
   'path': '/',
   'max-age': cookieLength,
@@ -275,11 +276,14 @@ function SetChannelCookie(){
   //Check if the cookise should be a session cookie, and if the user is out of an Awin session.
   if(cookiePeriod == 0 && matchedSourceParameter == "na" && !isOrganicJourney && !getCookie(cookieName)[0]){
     awLastClick = "direct";
-    setCookie(cookieName, awLastClick, options, false);
+    setCookie(cookieName, awLastClick, sessionOptions, false);
     data.gtmOnSuccess();
     return;
+  } else if (cookiePeriod == 0){
+    setCookie(cookieName, awLastClick, sessionOptions, false);
+    return;
   }
-  setCookie(cookieName, awLastClick, options, false);
+  setCookie(cookieName, awLastClick, defaultOptions, false);
 }
 
 //Since the tag now uses an all pages trigger, it needs to know if the user is simply navigating through the website, or visiting it for the first time in his journey.
