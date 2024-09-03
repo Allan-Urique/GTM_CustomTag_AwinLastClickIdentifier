@@ -2,9 +2,11 @@ homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
 # Latest version
+  - sha: 706c18199c0565063551c0e30953691b792b31a7
+    changeNotes: Fixed session cookie behavior in safari.
+# Older versions
   - sha: b8b08cdef748b24f2d3eaa572e52230a7ce5ba70
     changeNotes: Tag does not default to "undefined" anymore.
-# Older versions
   - sha: 866ba43822d4426872ae57cf78bdd8850c1ac645
     changeNotes: Updated the tag to better detect and report when a user is coming from a direct or organic journey.
   - sha: c6d5046f08f5937a00f05b7de94945f27857a5bc
