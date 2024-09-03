@@ -133,15 +133,6 @@ ___TEMPLATE_PARAMETERS___
     "defaultValue": false
   },
   {
-    "type": "CHECKBOX",
-    "name": "usingAllPageTrigger",
-    "checkboxText": "Using All Page Trigger",
-    "simpleValueType": true,
-    "help": "If you are using an all page trigger, check this box.",
-    "alwaysInSummary": true,
-    "defaultValue": false
-  },
-  {
     "type": "TEXT",
     "name": "awinChannelCookieDomain",
     "displayName": "AwinChannelCookie Domain",
@@ -184,7 +175,6 @@ const awinSource = data.awinSource.split(",");
 const parseUrl = require('parseUrl');
 const overwriteCookieDomain = data.overwriteCookieDomain;
 const awinChannelCookieDomain = data.awinChannelCookieDomain;
-const usingAllPageTrigger = data.usingAllPageTrigger;
 
 //URL variables. 
 let referrer = referrerURL(); // This will return the referrer URL for deduping agains organic.
@@ -287,12 +277,11 @@ function SetChannelCookie(){
 }
 
 //Since the tag now uses an all pages trigger, it needs to know if the user is simply navigating through the website, or visiting it for the first time in his journey.
-if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
+if(Contains(referrer, websiteDomain)){
   //Navigating through website, halt the progress of the tag.
   data.gtmOnSuccess();
 } else {
   //First visit in the session, proceed with tag behaviour.
-    
   //Find and match the given source parameter.
   for(var i = 0; i < queryParameters.length; i++){
     queryValues = queryParameters[i].split("=");
@@ -349,6 +338,7 @@ if(usingAllPageTrigger && Contains(referrer, websiteDomain)){
   // Call data.gtmOnSuccess when the tag is finished.
   data.gtmOnSuccess();
 }
+
 
 ___WEB_PERMISSIONS___
 
