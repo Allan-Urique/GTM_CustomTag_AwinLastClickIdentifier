@@ -2,9 +2,11 @@ homepage: "https://www.awin.com"
 documentation: "https://www.awin.com"
 versions:
 # Latest version
+  - sha: 6966a7c70a17fe6cf54b9e5b1b3ae271731df87f
+    changeNotes: Updated template to have debugging capabilities through the console with a log, or a pixel if preferred.
+# Older versions
   - sha: 81344ca07ca7d1aa3f8ae8cdf0e05eab8d10000f
     changeNotes: Updated template to not use "Using All Pages Trigger" checkbox as it was redundant.
-# Older versions
   - sha: 706c18199c0565063551c0e30953691b792b31a7
     changeNotes: Fixed session cookie behavior in safari.
   - sha: b8b08cdef748b24f2d3eaa572e52230a7ce5ba70
