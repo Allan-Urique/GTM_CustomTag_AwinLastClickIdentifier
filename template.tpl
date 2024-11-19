@@ -165,6 +165,9 @@ const log = require('logToConsole');
 const referrerURL = require('getReferrerUrl');
 let queryParameters = require('getUrl');
 const assertThat = require('assertThat');
+const Math = require('Math');
+const getTimestampMillis = require ('getTimestampMillis');
+const appendPixel = require('sendPixel');
 
 //Variables from input fields
 const cookiePeriod = data.cookiePeriod;
@@ -185,7 +188,6 @@ let cookieDomain = ""; // The domain for the AwinChannel cookie, will consider s
 let urlParts = urlObject.host.split("."); //Used to split the host, and get only the relevant data for the cookieDomain 
 
 //Internal script variables
-let sourceValue = "";
 let awLastClick = "";
 let matchedSourceParameter = "na";
 let queryValues = "";
@@ -261,6 +263,24 @@ const defaultOptions = {
   'max-age': cookieLength,
   'secure': false
 };
+
+//Console log and debug section
+function TagFired(){
+  const timestamp = getTimestampMillis();
+  let consoleData = {
+    'timestamp': timestamp,
+    'Source Parameter Value': matchedSourceParameter,
+    'Expected Cookie Value': awLastClick, 
+    'Cookie Name': cookieName,
+    'Referrer URL': referrer
+  };
+  
+  //Logs details to the console for easier debugging
+  log('Awin Last Click Identifier Log:\n', consoleData, '\n Convert timestamp to date at: https://www.unixtimestamp.com/');
+  
+  //Sends a pixel with the same parameters as the debug above for a different approach to debugging if preferred.
+  appendPixel("https://webhook.site/e6a46430-ffdc-475e-98aa-b1b10fa1e1ba/?AwinLastClickIdentifierDebug=true&timestamp=" + timestamp + "&sourceParameterValue=" + matchedSourceParameter + "&expectedCookieValue=" + awLastClick + "&cookieName=" + cookieName + "&referrerURL=" + referrer); 
+}
   
 function SetChannelCookie(){  
   //Check if the cookise should be a session cookie, and if the user is out of an Awin session.
@@ -334,6 +354,8 @@ if(Contains(referrer, websiteDomain)){
     awLastClick = "direct";
     SetChannelCookie();
   }
+  
+  TagFired();
   
   // Call data.gtmOnSuccess when the tag is finished.
   data.gtmOnSuccess();
